@@ -19,6 +19,20 @@ public interface IChildManagerComponent
         }
     }
 
+    sealed void ApplyToChildren<ChildType>(Action<int, ChildType> applyFunction)
+    {
+        if (this is Node node)
+        {
+            node.GetChildren().ForEach((index, node) =>
+            {
+                if (node is ChildType child)
+                {
+                    applyFunction(index, child);
+                }
+            });
+        }
+    }
+
     sealed bool HasChild<ChildType>(Func<ChildType, bool> predicate)
     {
         if (this is Node node)
