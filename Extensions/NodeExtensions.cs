@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq;
 using Godot;
 
 public static class NodeExtensions
@@ -15,16 +17,12 @@ public static class NodeExtensions
 
   public static int GetChildCount<[MustBeVariant] ChildType>(this Node node)
   {
-    int count = 0;
-    node.GetChildren().ToList().ForEach(child =>
-    {
-      if(child is ChildType)
-      {
-          count++;
-      }
-    });
+    return GetChildren<ChildType>(node).Count;
+  }
 
-    return count;
+  public static List<ChildType> GetChildren<[MustBeVariant] ChildType>(this Node node)
+  {
+    return node.GetChildren().Where(child => child is ChildType).Cast<ChildType>().ToList();
   }
 
   public static bool HasChild<[MustBeVariant] ChildType>(this Node node)
