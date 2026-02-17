@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Godot;
@@ -28,5 +29,10 @@ public static class NodeExtensions
   public static bool HasChild<[MustBeVariant] ChildType>(this Node node)
   {
     return GetChildCount<ChildType>(node) > 0;
+  }
+
+  public static ChildType FirstChild<[MustBeVariant] ChildType>(this Node node, Func<ChildType, bool> predicate) where ChildType : Node
+  {
+    return (ChildType)node.GetChildren().First(x => x is ChildType child && predicate(child));
   }
 }
