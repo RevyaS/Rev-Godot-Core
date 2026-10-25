@@ -1,2 +1,6 @@
+v.00002
+- Added MessagePackData for saving/loading MessagePack objects on any Godot path
+- Added SaveSlot and SaveSlotLayout for numbered save files
+
 v.00001
 - Initial Transfer from Plugin
