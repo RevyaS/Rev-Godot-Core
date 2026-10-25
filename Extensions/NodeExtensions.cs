@@ -45,4 +45,9 @@ public static class NodeExtensions
   {
     return (ChildType)node.GetChildren().First(x => x is ChildType child && predicate(child));
   }
+
+  public static ChildType FirstChild<[MustBeVariant] ChildType>(this Node node) where ChildType : Node
+  {
+    return (ChildType)node.GetChildren().First(x => x is ChildType child);
+  }
 }
