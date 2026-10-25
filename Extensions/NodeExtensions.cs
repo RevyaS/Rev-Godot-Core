@@ -11,6 +11,16 @@ public static class NodeExtensions
     node.GetChildren().ForEach((_, child) => child.QueueFree());
   }
 
+  /// <summary>Like <see cref="ClearChildren"/>, but the children leave the tree now so containers don't lay them out this frame.</summary>
+  public static void FreeChildren(this Node node)
+  {
+    foreach (var child in node.GetChildren())
+    {
+      node.RemoveChild(child);
+      child.QueueFree();
+    }
+  }
+
   public static void SetFontColor(this Control control, Color color)
   {
     control.Set(fontColorOverride, color);
